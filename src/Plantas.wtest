@@ -1,0 +1,51 @@
+import Plantas.*
+
+describe "Menta" {
+	const menta1 = new Menta(altura = 1, anoDeObtencion = 2010)
+	const menta2 = new Menta(altura = 0.3, anoDeObtencion = 2010)
+	
+	test "menta1 deberia dar semillas" {
+		assert.that(menta1.daNuevasSemillas())
+	}
+	
+	test "menta1 deberia ocupar 3 metros cuadrados" {
+		assert.equals(3, menta1.espacio())
+	}
+	
+	test "menta2 no deberia dar semillas" {
+		assert.notThat(menta2.daNuevasSemillas())
+	}
+	
+	test "menta2 deberia ocupar 0.9 metros cuadrados" {
+		assert.equals(0.9, menta2.espacio())
+	}
+}
+
+describe "Soja" {
+	const soja1 = new Soja(altura = 0.6, anoDeObtencion = 2009)
+	
+	test "soja1 deberia de tolerar 7 horas de sol" {
+		assert.equals(7, soja1.horasDeSolTolera())
+	}
+	
+	test "soja1 no deberia de dar semillas" {
+		assert.notThat(soja1.daNuevasSemillas())
+	}
+	
+	test "soja1 deberia ocupar 7 metros cuadrados" {
+		assert.equals(0.3, soja1.espacio())
+	}
+}
+
+describe "Quinoa" {
+	const quinoa1 = new Quinoa(altura = 0.6, anoDeObtencion = 2010, toleranciaSolar = 12)
+	const quinoa2 = new Quinoa(altura = 0.6, anoDeObtencion = 2001, toleranciaSolar = 9)
+	
+	test "quinoa1 deberia dar semillas" {
+		assert.that(quinoa1.daNuevasSemillas())
+	}
+	
+	test "quinoa2 deberia dar semillas" {
+		assert.that(quinoa2.daNuevasSemillas())
+	}
+}

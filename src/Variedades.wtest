@@ -1,0 +1,27 @@
+import Variedades.*
+
+describe "SojaTransgenica" {
+	const sojaTransgenica1 = new SojaTransgenica(altura = 0.6, anoDeObtencion = 2009)
+	const sojaTransgenica2 = new SojaTransgenica(altura = 0.6, anoDeObtencion = 2009)
+	
+	test "soja1 no deberia de dar semillas" {
+		assert.notThat(sojaTransgenica1.daNuevasSemillas())
+	}
+	
+	test "soja2 no deberia de dar semillas" {
+		assert.notThat(sojaTransgenica2.daNuevasSemillas())
+	}
+}
+
+describe "HierbaBuena" {
+	const hierbaBuena1 = new HierbaBuena(altura = 1, anoDeObtencion = 2010)
+	const hierbaBuena2 = new HierbaBuena(altura = 0.3, anoDeObtencion = 2010)
+	
+	test "menta1 deberia ocupar 6 metros cuadrados" {
+		assert.equals(6, hierbaBuena1.espacio())
+	}
+	
+	test "menta2 deberia ocupar 1.8 metros cuadrados" {
+		assert.equals(1.8, hierbaBuena2.espacio())
+	}
+}

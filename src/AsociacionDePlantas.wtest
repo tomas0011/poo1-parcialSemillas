@@ -1,0 +1,30 @@
+import Parcelas.*
+import Plantas.*
+import Variedades.*
+
+describe "AsociacionDePlantas" {
+	const parcelaEcologica = new ParcelaEcologica(ancho = 20, largo = 3, horasDeSolQueRecibe = 7)
+	const parcelaIndustrial = new ParcelaIndustrial(ancho = 20, largo = 1, horasDeSolQueRecibe = 8)
+	
+	const quinoa = new Quinoa(altura = 0.6, anoDeObtencion = 2010, toleranciaSolar = 12)
+	const menta = new Menta(altura = 1, anoDeObtencion = 2010)
+	
+	test "parcelaEcologica se asocia bien con la quinoa" {
+		assert.that(parcelaEcologica.seAsociaBien(quinoa))
+	}
+	
+	test "parcelaEcologica no se asocia bien con la quinoa si antes hay menta" {
+		parcelaEcologica.plantarUnaPlanta(menta)
+		assert.notThat(parcelaEcologica.seAsociaBien(quinoa))
+	}
+	
+	test "parcelaIndustrial se asocia bien con la quinoa" {
+		assert.that(parcelaIndustrial.seAsociaBien(quinoa))
+	}
+	
+	test "parcelaIndustrial no se asocia bien con la quinoa si antes hay 2 quinoas" {
+		parcelaIndustrial.plantarUnaPlanta(quinoa)
+		parcelaIndustrial.plantarUnaPlanta(quinoa)
+		assert.notThat(parcelaIndustrial.seAsociaBien(quinoa))
+	}
+}

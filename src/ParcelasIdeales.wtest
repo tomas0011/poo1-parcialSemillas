@@ -1,0 +1,43 @@
+import Parcelas.*
+import Plantas.*
+import Variedades.*
+
+describe "ParcelasIdeales" {
+	const menta = new Menta(altura = 1, anoDeObtencion = 2010)
+	const hierbaBuena = new HierbaBuena(altura = 1, anoDeObtencion = 2010)
+	const quinoa = new Quinoa(altura = 0.6, anoDeObtencion = 2010, toleranciaSolar = 12)
+	const soja = new Soja(altura = 0.6, anoDeObtencion = 2009)
+	const sojaTransgenica = new SojaTransgenica(altura = 0.6, anoDeObtencion = 2009)
+	
+	const parcelaDeMenta = new Parcela(ancho = 20, largo = 4, horasDeSolQueRecibe = 8)
+	const parcelaDeHierbaBuena = new Parcela(ancho = 20, largo = 4, horasDeSolQueRecibe = 8)
+	const parcelaDeQuinoa = new Parcela(ancho = 20, largo = 3, horasDeSolQueRecibe = 2)
+	const parcelaDeSoja = new Parcela(ancho = 20, largo = 1, horasDeSolQueRecibe = 7)
+	const parcelaDeSojaTransgenica = new Parcela(ancho = 5, largo = 1, horasDeSolQueRecibe = 8)
+	
+	test "la parcela de menta deberia ser ideal para la menta" {
+		assert.that(menta.esParcelaIdeal(parcelaDeMenta))
+	}
+	
+	test "la parcela de hierba buena buena deberia ser ideal para la hierba buena" {
+		assert.that(hierbaBuena.esParcelaIdeal(parcelaDeHierbaBuena))
+	}
+	
+	test "la parcela de menta buena buena deberia ser ideal para la hierba buena" {
+		assert.that(hierbaBuena.esParcelaIdeal(parcelaDeMenta))
+	}
+	
+	test "la parcela de quinoa deberia ser ideal para la quinoa" {
+		parcelaDeQuinoa.plantarUnaPlanta(menta)
+		parcelaDeQuinoa.plantarUnaPlanta(hierbaBuena)
+		assert.that(quinoa.esParcelaIdeal(parcelaDeQuinoa))
+	}
+	
+	test "la parcela de soja deberia ser ideal para la soja" {
+		assert.that(soja.esParcelaIdeal(parcelaDeSoja))
+	}
+	
+	test "la parcela de soja transgenica deberia ser ideal para la soja transgenica" {
+		assert.that(sojaTransgenica.esParcelaIdeal(parcelaDeSojaTransgenica))
+	}
+}
