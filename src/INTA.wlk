@@ -1,6 +1,12 @@
 object inta {
 	const parcelas = #{}
 	
+	method parcelas() = parcelas
+	
+	method agregarParcela(parcela) {
+		parcelas.add(parcela)
+	}
+	
 	method promedioDePlantas() = parcelas.sum({ parcela => parcela.plantas().size() }) / parcelas.size()
 	
 	method masAutosustentable() {

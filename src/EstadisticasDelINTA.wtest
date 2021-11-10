@@ -1,36 +1,37 @@
 import Parcelas.*
 import Plantas.*
 import Variedades.*
+import INTA.*
 
 describe "EstadisticasDelInta" {
-//	const parcelaEcologica = new ParcelaEcologica(ancho = 20, largo = 3, horasDeSolQueRecibe = 7)
-//	const parcelaIndustrial = new ParcelaIndustrial(ancho = 20, largo = 1, horasDeSolQueRecibe = 8)
-//	
-//	const quinoa = new Quinoa(altura = 0.6, anoDeObtencion = 2010, toleranciaSolar = 12)
-//	const menta = new Menta(altura = 1, anoDeObtencion = 2010)
-//	
-//	method 
-//	
-//	test "parcelaEcologica se asocia bien con la quinoa" {
-//		assert.that(parcelaEcologica.seAsociaBien(quinoa))
-//	}
-//	
-//	test "parcelaEcologica no se asocia bien con la quinoa si antes hay menta" {
-//		parcelaEcologica.plantarUnaPlanta(menta)
-//		assert.notThat(parcelaEcologica.seAsociaBien(quinoa))
-//	}
-//	
-//	test "parcelaIndustrial se asocia bien con la quinoa" {
-//		assert.that(parcelaIndustrial.seAsociaBien(quinoa))
-//	}
-//	
-//	test "parcelaIndustrial no se asocia bien con la quinoa si antes hay 2 quinoas" {
-//		parcelaIndustrial.plantarUnaPlanta(quinoa)
-//		parcelaIndustrial.plantarUnaPlanta(quinoa)
-//		assert.notThat(parcelaIndustrial.seAsociaBien(quinoa))
-//	}
+	const parcelas = [
+		new ParcelaEcologica(ancho = 20, largo = 3, horasDeSolQueRecibe = 7),
+		new ParcelaEcologica(ancho = 20, largo = 2, horasDeSolQueRecibe = 7),
+		new ParcelaEcologica(ancho = 20, largo = 4, horasDeSolQueRecibe = 7)
+	]
+	const parcelaMasAutosustentable = new ParcelaEcologica(ancho = 20, largo = 5, horasDeSolQueRecibe = 7)
 	
-	test "parcelaEcologica se asocia bien con la quinoa" {
-		assert.that(true)
+	const quinoa = new Quinoa(altura = 0.6, anoDeObtencion = 2010, toleranciaSolar = 12) 
+	
+	method initialize() {
+		parcelas.add(parcelaMasAutosustentable)
+		parcelas.forEach({ parcela => 
+			parcela.plantarUnaPlanta(quinoa)
+			parcela.plantarUnaPlanta(quinoa)
+			parcela.plantarUnaPlanta(quinoa)
+			parcela.plantarUnaPlanta(quinoa)
+			inta.agregarParcela(parcela)
+		})
+	}
+	
+	test "el promedio de plantas deberia ser de 3" {
+		console.println(inta.parcelas())
+		assert.equals(4, inta.promedioDePlantas())
+	}
+	
+	test "deberia devolver la parcela mas autosustentable" {
+		parcelaMasAutosustentable.plantarUnaPlanta(quinoa)
+		inta.agregarParcela(parcelaMasAutosustentable)
+		assert.equals(parcelaMasAutosustentable, inta.masAutosustentable())
 	}
 }
